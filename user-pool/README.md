@@ -1,30 +1,27 @@
-# Welcome to your CDK TypeScript project!
+# UserPool
 
-This is a blank project for TypeScript development with CDK.
+## Prerequisites
+* node >= 12
+* TypeScript >= 4
+* CDK == 1.67.0
+* Configures AWS credentials
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+If you are using VSCode there is a [`.devcontainer`](https://github.com/awons/cbe-e002/tree/main/.devcontainer) setup you can use to open this project in a container. All tooling is already installed. It requires your AWS credentials to be configured in `~/.aws`.
 
 ## Setting up
 
-Copy `.env.dist` to `.env` like this:
+Copy `.env.dist` to `.env`:
 ```bash
 cp user-pool/.env.dist user-pool/.env
 ```
 
-and set put a domain prefix for a hosted UI in `.env`.
+and set put a domain prefix for a hosted UI in `.env`. It's a prefix within `auth.{region}.amazoncognito.com` domain so make sure you pick a random prefix that is available.
 
-To build and deploy the stacj run:
+To build and deploy the stack run:
 ```bash
 npm install
 npm run build
 cdk deploy
 ```
+
+You will find the stack in CloudFormation under the name `CBE-E002-UserPoolStack`.

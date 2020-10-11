@@ -6,4 +6,4 @@ import { UserPoolStack } from '../lib/user-pool-stack';
 require('dotenv').config();
 
 const app = new cdk.App();
-new UserPoolStack(app, 'UserPoolStack');
+new UserPoolStack(app, 'CBE-E002-UserPoolStack');
