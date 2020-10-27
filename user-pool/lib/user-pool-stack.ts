@@ -1,5 +1,5 @@
 import * as cdk from '@aws-cdk/core';
-import { UserPool, UserPoolDomain, UserPoolClient } from '@aws-cdk/aws-cognito';
+import { UserPool, UserPoolDomain, UserPoolClient, CfnUserPoolGroup } from '@aws-cdk/aws-cognito';
 
 export class UserPoolStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -22,24 +22,40 @@ export class UserPoolStack extends cdk.Stack {
       }
     });
 
-    new UserPoolDomain(this, 'my-user-pool-domain', {
-      userPool: userPool,
-      cognitoDomain: {
-        domainPrefix: process.env.DOMAIN_REFIX ? process.env.DOMAIN_REFIX : 'my-test-domain'
-      }
-    });
-
-    new UserPoolClient(this, 'my-user-pool-client', {
+    const userPoolClient = new UserPoolClient(this, 'my-user-pool-client', {
       userPool: userPool,
       userPoolClientName: 'my-test-client',
       authFlows: {
-        userPassword: true
+        userPassword: true,
       },
-      oAuth: {
-        flows: {
-          authorizationCodeGrant: true
-        }
-      }
+      disableOAuth: true
+    });
+
+    const group1 = new CfnUserPoolGroup(this, 'my-user-group-1', {
+      userPoolId: userPool.userPoolId,
+      groupName: 'myusergroup1'
+    });
+
+    const group2 = new CfnUserPoolGroup(this, 'my-user-group-2', {
+      userPoolId: userPool.userPoolId,
+      groupName: 'myusergroup2'
+    });
+
+    new cdk.CfnOutput(this, 'output-user-pool-id', {
+      value: userPool.userPoolId,
+      description: 'User Pool ID'
+    });
+    new cdk.CfnOutput(this, 'output-client-id', {
+      value: userPoolClient.userPoolClientId,
+      description: 'Client ID'
+    });
+    new cdk.CfnOutput(this, 'group1-name', {
+      value: group1.groupName ? group1.groupName : '',
+      description: 'ID of group 1'
+    });
+    new cdk.CfnOutput(this, 'group2-name', {
+      value: group2.groupName ? group2.groupName : '',
+      description: 'ID of group 2'
     });
   }
 }

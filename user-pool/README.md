@@ -10,13 +10,6 @@ If you are using VSCode there is a [`.devcontainer`](https://github.com/awons/cb
 
 ## Setting up
 
-Copy `.env.dist` to `.env`:
-```bash
-cp user-pool/.env.dist user-pool/.env
-```
-
-and set put a domain prefix for a hosted UI in `.env`. It's a prefix within `auth.{region}.amazoncognito.com` domain so make sure you pick a random prefix that is available.
-
 To build and deploy the stack run:
 ```bash
 npm install
@@ -25,3 +18,35 @@ cdk deploy
 ```
 
 You will find the stack in CloudFormation under the name `CBE-E002-UserPoolStack`.
+
+### CLI commands
+
+Sign up new user:
+```bash
+aws cognito-idp sign-up --client-id your-client-id --username your-email@example.com --password your-password
+```
+
+Confirm user's account:
+```bash
+aws cognito-idp confirm-sign-up --client-id your-client-id --username your-email@example.com --confirmation-code your-confirmation-code
+```
+
+Assign user to a group:
+```bash
+aws cognito-idp admin-add-user-to-group --user-pool-id your-pool-id --group-name your-group-name --username your-email@example.com
+```
+
+Initiate authentication:
+```bash
+aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH --client-id your-client-id --auth-parameters USERNAME=your-email@example.com,PASSWORD=your-password
+```
+
+Get user data:
+```bash
+aws cognito-idp get-user --access-token here-comes-your-access-token
+```
+
+Global sign out:
+```bash
+aws cognito-idp global-sign-out --access-token here-comes-your-access-token
+```
