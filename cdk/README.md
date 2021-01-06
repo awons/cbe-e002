@@ -1,9 +1,9 @@
 # UserPool
 
 ## Prerequisites
-* node >= 12
+* node >= 14
 * TypeScript >= 4
-* CDK == 1.67.0
+* CDK == 1.83.0
 * Configured AWS credentials
 
 If you are using VSCode there is a [`.devcontainer`](https://github.com/awons/cbe-e002/tree/main/.devcontainer) setup you can use to open this project in a container. All tooling is already installed. It requires your AWS credentials to be configured in `~/.aws`.
