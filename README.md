@@ -4,7 +4,7 @@
 
 ### Part 1 - Cognito: User Pool; the basics
 
-* YouTube video - https://youtu.be/H0HQwBOmQpY
+* YouTube video - https://youtu.be/Teacu8aR2HQ
 * Blog post - https://www.cloudbyexample.io/part-1-aws-cognito-user-pool-the-basics
 
 ## Details
