@@ -7,10 +7,15 @@
 * YouTube video - https://youtu.be/Teacu8aR2HQ
 * Blog post - https://www.cloudbyexample.io/part-1-aws-cognito-user-pool-the-basics
 
-### Part 2 - Cognito: User Pool; the basics
+### Part 2 - Cognito: User Pool; authenticating with username and password
 
 * YouTube video - Not yet available
 * Blog post - https://www.cloudbyexample.io/part-2-aws-cognito-user-pool-authenticating-with-username-and-password
+
+### Part 3 - Cognito: User Pool; authenticating with username and SRP
+
+* YouTube video - Not yet available
+* Blog post - https://www.cloudbyexample.io/part-3-cognito-user-pool-authenticating-with-username-and-srp
 
 ## Details
 
