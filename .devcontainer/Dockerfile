@@ -19,3 +19,7 @@ RUN npm install -g aws-cdk@1.83.0
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && sudo ./aws/install
+
+RUN apt-key adv --refresh-keys --keyserver keyserver.ubuntu.com
+RUN apt update && apt install -y python3-pip
+RUN pip3 install -I click==7.1.2 autopep8==1.5.5 boto3==1.17.3

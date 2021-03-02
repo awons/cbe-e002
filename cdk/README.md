@@ -7,6 +7,11 @@
 * CDK == 1.83.0
 * Configured AWS credentials
 
+For part 3 you will additionally need Python 3 with the following dependencies:
+
+* click = 7.1.2
+* boto3= = 1.17.3
+
 If you are using VSCode there is a [`.devcontainer`](https://github.com/awons/cbe-e002/tree/main/.devcontainer) setup you can use to open this project in a container. All tooling is already installed. It requires your AWS credentials to be configured in `~/.aws`.
 
 ## Setting up
@@ -370,3 +375,96 @@ Get current user's data:
 aws cognito-idp get-user --access-token <value>
 ```
 
+### **Part 3 - User Pool; authenticating with username and SRP**
+
+#### **Additional reqirements**
+
+For this example to work you need to have python3
+
+Create the stack:
+
+```bash
+cdk deploy CBE-E002-UserPoolSrp
+```
+
+Sign up new user:
+
+```bash
+aws cognito-idp sign-up --client-id <value> --username my_unique_username --password 123456qwerty
+```
+
+Confirm the account:
+
+```bash
+aws cognito-idp admin-confirm-sign-up --user-pool-id <value> --username my_unique_username
+```
+
+Authenticate:
+
+```bash
+../srp/test_aws_srp.py\
+    --username my_unique_username\
+    --password 123456qwerty\
+    --pool-id <value>\
+    --client-id <value>\
+    --region <value>
+```
+
+Destroy stack:
+
+```bash
+cdk destroy CBE-E002-UserPoolSrp
+```
+
+Deploy stack with username and password authentication:
+
+```bash
+DO_NOT_USE_SRP=1 cdk deploy CBE-E002-UserPoolSrp
+```
+
+Sign up new user:
+
+```bash
+aws cognito-idp sign-up --client-id <value> --username my_unique_username --password 123456qwerty
+```
+
+Confirm the account:
+
+```bash
+aws cognito-idp admin-confirm-sign-up --user-pool-id <value> --username my_unique_username
+```
+
+Sign in with username and password:
+
+```bash
+aws cognito-idp initiate-auth --client-id <value> --auth-flow USER_PASSWORD_AUTH --auth-parameters USERNAME=my_unique_username,PASSWORD=123456qwerty
+```
+
+Change stack to use only SRP:
+
+```bash
+cdk deploy CBE-E002-UserPoolSrp
+```
+
+Try againto authenticate with username and password:
+
+```bash
+aws cognito-idp initiate-auth --client-id <value> --auth-flow USER_PASSWORD_AUTH --auth-parameters USERNAME=my_unique_username,PASSWORD=123456qwerty
+```
+
+Authenticate with SRP
+
+```bash
+../srp/test_aws_srp.py\
+    --username my_unique_username\
+    --password 123456qwerty\
+    --pool-id <value>\
+    --client-id <value>\
+    --region <value>
+```
+
+Destroy stack:
+
+```bash
+cdk destroy CBE-E002-UserPoolSrp
+```
