@@ -14,7 +14,7 @@
 
 ### Part 3 - Cognito: User Pool; authenticating with username and SRP
 
-* YouTube video - Not yet available
+* YouTube video - https://youtu.be/aOBM5dIB3a4
 * Blog post - https://www.cloudbyexample.io/part-3-cognito-user-pool-authenticating-with-username-and-srp
 
 ## Details
